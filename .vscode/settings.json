@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/my-fastapi-app/.venv/bin/python",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/my-fastapi-app/.venv/lib/python3.*/site-packages"
+    ],
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.python"
+    }
+} 
