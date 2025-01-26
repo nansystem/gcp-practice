@@ -1,5 +1,12 @@
 node_modules
 
+# Remix関連
+/build
+/public/build
+.env
+.env.*
+!.env.example
+
 /.cache
 /build
 .env
