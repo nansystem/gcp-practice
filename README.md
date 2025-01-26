@@ -4,11 +4,14 @@
 ``` sh
 # remixアプリを起動
 cd my-remix-app
-docker build -t my-remix-app .
-docker run -p 8080:3000 my-remix-app
+npm run dev -- --port 3000
 ```
 
 ``` sh
+# dockerで起動
+docker build -t my-remix-app .
+docker run -p 8080:3000 my-remix-app
+
 # 特定のコンテナを停止
 docker ps
 docker stop [コンテナID]
@@ -33,10 +36,7 @@ gcloud run services delete remix-service --region asia-northeast1
 
 ## fastapiアプリ
 ``` sh
-# fastapiアプリを作成
-poetry init
-poetry add fastapi uvicorn
-
 # 起動
+cd my-fastapi-app
 poetry run uvicorn main:app --reload
 ```
