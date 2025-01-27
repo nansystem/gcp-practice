@@ -1,15 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from config.settings import settings
 app = FastAPI()
 
-# CORSの設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","http://frontend:3000"],  # Remixの開発サーバーのURL
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=settings.cors_methods,
+    allow_headers=settings.cors_headers,
 )
 
 @app.get("/")
