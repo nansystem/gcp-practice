@@ -1,0 +1,17 @@
+.git
+.gitignore
+
+tests
+.pre-commit-config.yaml
+.vscode
+
+Dockerfile
+.dockerignore
+
+README.md
+
+.venv
+
+**/*/__pycache__
+
+**/*/__init__.py
