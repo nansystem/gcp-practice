@@ -18,7 +18,8 @@ WORKDIR /app
 
 COPY --from=builder /app /app
 
-ENV PATH="/app/.venv/bin:$PATH" \
+ENV VIRTUAL_ENV=/app/.venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH" \
     PYTHONUNBUFFERED=1
 
 EXPOSE 8000

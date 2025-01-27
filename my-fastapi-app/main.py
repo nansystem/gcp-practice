@@ -6,7 +6,7 @@ app = FastAPI()
 # CORSの設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Remixの開発サーバーのURL
+    allow_origins=["http://localhost:3000","http://frontend:3000"],  # Remixの開発サーバーのURL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

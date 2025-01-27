@@ -7,7 +7,8 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/hello');
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
+    const response = await fetch(`${backendUrl}/api/hello`);
     const data = await response.json();
     
     return new Response(JSON.stringify(data), {
