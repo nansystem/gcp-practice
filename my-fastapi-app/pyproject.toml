@@ -19,9 +19,15 @@ dependencies = [
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry]
+package-mode = false
+
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi = "^0.110.0"
-uvicorn = "^0.27.1"
+uvicorn = "^0.27.0"
 pydantic = "^2.6.1"
 pydantic-settings = "^2.1.0"
+sqlalchemy = "^2.0.25"
+pymysql = "^1.1.0"
+python-dotenv = "^1.0.0"
