@@ -1,9 +1,14 @@
 # fastapiアプリ
 
 ``` sh
+# データベースのテーブルを作成
+PYTHONPATH=$PYTHONPATH:. poetry run python scripts/init_db.py
+PYTHONPATH=$PYTHONPATH:. poetry run python scripts/seed_db.py
+```
+
+``` sh
 # 起動
-cd my-fastapi-app
-poetry run uvicorn main:app --reload
+poetry run uvicorn app.main:app --reload
 ```
 
 ``` sh

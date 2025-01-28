@@ -1,17 +1,26 @@
-from sqlalchemy import create_engine
-import sys
-import os
-
-# プロジェクトルートをPYTHONPATHに追加
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from app.core.config import settings
-from app.db.base import Base
+from app.db.base_class import Base
+from app.db.session import engine
 
 def init_db() -> None:
-    engine = create_engine(settings.DATABASE_URL)
-    Base.metadata.create_all(bind=engine)
+    try:
+        print("登録されているモデル:")
+        for table in Base.metadata.tables.keys():
+            print(f"- {table}")
+            
+        Base.metadata.create_all(bind=engine)
+        print("テーブルの作成に成功しました")
+    except Exception as e:
+        print(f"テーブル作成エラー: {e}")
+        raise
 
 if __name__ == "__main__":
+    from app.db.session import engine
+
+    try:
+        with engine.connect() as conn:
+            print("データベースへの接続に成功しました")
+    except Exception as e:
+        print(f"接続エラー: {e}")
+
     init_db()
-    print("データベーステーブルが作成されました") 
+    print("データベースのテーブルが初期化されました。")
