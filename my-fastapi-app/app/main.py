@@ -1,14 +1,7 @@
 from fastapi import FastAPI
+
+from app.api.v1 import users
+
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
-
-@app.get("/api/hello")
-async def read_root():
-    return {"message": "Hello from FastAPI!"} 
+app.include_router(users.router, prefix="/api/v1")
