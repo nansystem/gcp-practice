@@ -1,38 +1,18 @@
-# Welcome to Remix!
-
-- [Remix Docs](https://remix.run/docs)
-
-## Development
-
-From your terminal:
-
-```sh
-npm run dev
+## remixアプリ
+``` sh
+# remixアプリを起動
+cd my-remix-app
+npm run dev -- --port 3000
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+``` sh
+# dockerで起動
+docker build -t remix-app .
+docker run -p 3000:3000 remix-app
 
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
+# 停止
+docker ps
+docker stop [コンテナID]
+# すべてのコンテナを停止
+docker stop $(docker ps -q)
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/server`
-- `build/client`
