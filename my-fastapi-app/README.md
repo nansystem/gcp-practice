@@ -16,3 +16,8 @@ poetry run uvicorn app.main:app --reload
 docker build -t fastapi-app .
 docker run --rm -p 8080:8080 fastapi-app
 ```
+
+``` sh
+# スキーマを出力
+PYTHONPATH=$PYTHONPATH:. poetry run python scripts/export_schema.py
+```

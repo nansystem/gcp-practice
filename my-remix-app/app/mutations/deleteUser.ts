@@ -1,4 +1,4 @@
-import { graphqlClient } from "~/lib/graphql";
+import { graphqlClient } from "~/lib/graphql-no-lib-client";
 
 export const DELETE_USER = `
   mutation($id: Int!) {

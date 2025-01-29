@@ -2,6 +2,21 @@ from datetime import datetime
 
 import strawberry
 
+USERS = [
+    {
+        "id": 1,
+        "name": "Test User 1",
+        "email": "test1@example.com",
+        "created_at": datetime.now(),
+    },
+    {
+        "id": 2,
+        "name": "Test User 2",
+        "email": "test2@example.com",
+        "created_at": datetime.now(),
+    },
+]
+
 
 @strawberry.type
 class User:
@@ -15,48 +30,53 @@ class User:
 class Query:
     @strawberry.field
     def users(self) -> list[User]:
-        # ダミーデータを返す
-        return [
-            User(
-                id=1,
-                name="Test User 1",
-                email="test1@example.com",
-                created_at=datetime.now(),
-            ),
-            User(
-                id=2,
-                name="Test User 2",
-                email="test2@example.com",
-                created_at=datetime.now(),
-            ),
-        ]
+        return [User(**user) for user in USERS]
 
     @strawberry.field
     def user(self, id: int) -> User | None:
-        # IDに基づいてユーザーを返す
-        return User(
-            id=id,
-            name=f"User {id}",
-            email=f"user{id}@example.com",
-            created_at=datetime.now(),
-        )
+        user = next((user for user in USERS if user["id"] == id), None)
+        return User(**user) if user else None
 
 
 @strawberry.type
 class Mutation:
     @strawberry.mutation
     def create_user(self, name: str, email: str) -> User:
-        # 新規ユーザー作成（ダミー）
-        return User(id=3, name=name, email=email, created_at=datetime.now())
+        new_id = max(user["id"] for user in USERS) + 1
+
+        new_user = {
+            "id": new_id,
+            "name": name,
+            "email": email,
+            "created_at": datetime.now(),
+        }
+
+        USERS.append(new_user)
+        return User(**new_user)
 
     @strawberry.mutation
-    def update_user(self, id: int, name: str, email: str) -> User:
-        # ユーザー更新（ダミー）
-        return User(id=id, name=name, email=email, created_at=datetime.now())
+    def update_user(self, id: int, name: str, email: str) -> User | None:
+        user_index = next(
+            (index for index, user in enumerate(USERS) if user["id"] == id), None
+        )
+
+        if user_index is None:
+            return None
+
+        USERS[user_index].update({"name": name, "email": email})
+
+        return User(**USERS[user_index])
 
     @strawberry.mutation
     def delete_user(self, id: int) -> bool:
-        # ユーザー削除（ダミー）
+        user_index = next(
+            (index for index, user in enumerate(USERS) if user["id"] == id), None
+        )
+
+        if user_index is None:
+            return False
+
+        USERS.pop(user_index)
         return True
 
 

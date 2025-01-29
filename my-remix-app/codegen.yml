@@ -1,0 +1,17 @@
+schema: "../my-fastapi-app/schema.graphql" # スキーマファイルの場所
+generates:
+  app/lib/graphql/types.ts: # 生成される型定義ファイル
+    plugins:
+      - typescript # 基本的な型定義
+    config:
+      scalars:
+        DateTime: string # DateTimeスカラー型の定義
+  app/lib/graphql/operations.ts: # 生成される操作の型定義
+    preset: import-types
+    presetConfig:
+      typesPath: ./types
+    plugins:
+      - typescript-operations # 操作の型定義
+      - typescript-graphql-request # GraphQL Requestクライアント用の型定義
+    documents:
+      - "app/graphql/**/*.ts" # GraphQL操作を含むファイル

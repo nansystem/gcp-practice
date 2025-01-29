@@ -25,4 +25,4 @@ app = FastAPI()
 app.include_router(users.router, prefix="/api/v1")
 
 graphql_app = GraphQLRouter(schema)
-app.include_router(graphql_app, prefix="/graphql")
+app.include_router(graphql_app, prefix="/api/graphql")
