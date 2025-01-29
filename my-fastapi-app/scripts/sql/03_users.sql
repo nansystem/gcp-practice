@@ -1,4 +1,4 @@
 INSERT IGNORE INTO users (name, email)
-VALUES 
+VALUES
     ('admin', 'admin@example.com'),
     ('user1', 'user1@example.com');
